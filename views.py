@@ -12,9 +12,9 @@ class ChromoGraph(View):
         filename = request.session.get('filename', 'nofile')
 
         if os.path.exists(os.getcwd() + '/ChromoGraph/static/' + filename):
-            return render(request, "chrofig.html", {'form': form, 'filename': filename})
+            return render(request, "ChromoGraph/chrofig.html", {'form': form, 'filename': filename})
 
-        return render(request, "index.html", {'form': form})
+        return render(request, "ChromoGraph/index.html", {'form': form})
 
     def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
@@ -34,4 +34,4 @@ class ChromoGraph(View):
             return redirect(request.path)
         else:
             form = UploadFileForm()
-        return render(request, 'index.html', {'form': form})
+        return render(request, 'ChromoGraph/index.html', {'form': form})
