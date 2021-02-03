@@ -13,13 +13,28 @@
     <li><a href="/" class="forward">&rArr; go to polls</a></li>
 </ul>
 </nav>
-  <form method="post" enctype="multipart/form-data">
+ <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 3em 4em 0px;">
+     Usage
+ </div>
+ <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 4em 3em;">
+     <ul>
+         <li>Export from chromatogram from Chromeleon to .txt file</li>
+         <li>Upload it to from below</li>
+         <li>Enter valid info about exporting graph below</li>
+         <li>Download image like others from google</li>
+         <li>(Downloadable link in progress)</li>
+     </ul>
+
+ </div>
+  <form method="post" enctype="multipart/form-data"
+  style="width:21em; border: 5px black solid; padding: 5px; margin: 3em 4em;">
   {% csrf_token %}
       <p>
           {{ form.as_p }}
           <input type="submit" value="Upload">
       </p>
   </form>
+
  <div id="content">
      {% block content %}{% endblock %}
  </div>
