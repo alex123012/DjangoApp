@@ -11,10 +11,9 @@ class FileFieldView(FormView):
     template_name = os.path.join("ChromoGraph", "index.html")  # Basic template
 
     def get(self, request):
-        if not request.COOKIES.get('sessionid', ''):  # set session cookie
-            request.session['sessionid'] = request.session.session_key
+        filename = check_status(request)  # Import file name if exists (after POST)
         form = self.form_class  # Set variable for form for template
-        filename = request.session.get('filenames', '')  # Import file name if exists (after POST)
+        # filename = request.session.get('filenames', '')
         if filename:
             zipper = False
             if len(filename) > 1:
@@ -25,10 +24,6 @@ class FileFieldView(FormView):
         return render(request, os.path.join("ChromoGraph", "index.html"), {'form': form})
 
     def post(self, request, *args, **kwargs):
-        if not os.path.exists(os.path.join('ChromoGraph', 'static',  'media')):  # Create new folders for storing graphs
-            os.mkdir(os.path.join('ChromoGraph', 'static',  'media'))
-        if not os.path.exists(os.path.join('ChromoGraph', 'static', 'media',  request.COOKIES['sessionid'])):
-            os.mkdir(os.path.join('ChromoGraph', 'static',  'media', request.COOKIES['sessionid']))
 
         form_class = self.get_form_class()
         form = self.get_form(form_class)  # Getting form for template
@@ -64,3 +59,21 @@ def zipgraph(ide):
                 myzip.write(os.path.join(root, file))
     os.chdir(cwd)
     return os.path.join('media', f'{ide}.zip')
+
+
+def check_status(request):
+    if not request.COOKIES.get('sessionid', '') or not request.COOKIES['sessionid']:  # set session cookie
+        request.session.create()
+        request.COOKIES['sessionid'] = request.session.session_key
+        print(request.session.session_key)
+    print(request.COOKIES)
+    path = os.path.join('ChromoGraph', 'static', 'media')
+    if not os.path.exists(path):  # Create new folders for storing graphs
+        os.mkdir(path)
+        request.session['filenames'] = []
+    path = os.path.join(path, request.COOKIES.get('sessionid'))
+    if not os.path.exists(path):
+        os.mkdir(path)
+        request.session['filenames'] = []
+    return request.session['filenames']
+

@@ -10,7 +10,7 @@
  <nav>
 <ul>
     <li><a href="/" class="back">&lArr; go back to menu</a></li>
-    <li><a href={% url 'ChromoGraph:chromograph' %} class="forward">&rArr; Upload multiple files</a></li>
+{#    <li><a href={% url 'ChromoGraph:chromograph' %} class="forward">&rArr; Upload multiple files</a></li>#}
 </ul>
 </nav>
  <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 2em 2em 0px;">
@@ -18,11 +18,12 @@
  </div>
  <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 2em 1.5em;">
      <ul>
-         <li>Export from chromatogram from Chromeleon to .txt file</li>
-         <li>Upload it to from below</li>
+         <li>Export chromatogram from Chromeleon to .txt file</li>
+         <li>Upload it to form below</li>
          <li>Enter valid info about exporting graph below</li>
-         <li>Download image like others from google</li>
-         <li>(Downloadable link in progress)</li>
+         <li>Download image/archive</li>
+         <li>If you upload several files - zip archive would be created</li>
+         <li>If you upload single file - you can download image by link or inspect it on site</li>
      </ul>
 
  </div>
