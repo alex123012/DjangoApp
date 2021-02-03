@@ -7,7 +7,7 @@ import zipfile
 
 
 class FileFieldView(FormView):
-    form_class = FileFieldForm({'min_time': 15, 'max_time': 45})  # Upload from from forms.py for template
+    form_class = FileFieldForm  # ({'min_time': 15, 'max_time': 45})  # Upload from from forms.py for template
     template_name = os.path.join("ChromoGraph", "index.html")  # Basic template
 
     def get(self, request, **kwargs):
