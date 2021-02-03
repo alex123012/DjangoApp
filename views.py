@@ -12,7 +12,7 @@ class FileFieldView(FormView):
 
     def get(self, request):
         if not request.COOKIES.get('sessionid', ''):  # set session cookie
-            request.session.session_key()
+            request.session['sessionid'] = request.session.session_key
         form = self.form_class  # Set variable for form for template
         filename = request.session.get('filenames', '')  # Import file name if exists (after POST)
         if filename:
