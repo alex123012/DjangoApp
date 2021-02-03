@@ -21,8 +21,11 @@ class FileFieldView(FormView):
         return render(request, os.path.join("ChromoGraph", "index.html"), {'form': form})
 
     def post(self, request, *args, **kwargs):
-        if not os.path.exists(os.path.join('ChromoGraph', 'static',  request.COOKIES['sessionid'])):
+        if not os.path.exists(os.path.join('ChromoGraph', 'static',  'media')):
+            os.mkdir(os.path.join('ChromoGraph', 'static',  'media'))
+        if not os.path.exists(os.path.join('ChromoGraph', 'static', 'media',  request.COOKIES['sessionid'])):
             os.mkdir(os.path.join('ChromoGraph', 'static',  'media', request.COOKIES['sessionid']))
+
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         files = request.FILES.getlist('file_field')
