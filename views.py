@@ -7,12 +7,12 @@ import zipfile
 
 
 class FileFieldView(FormView):
-    form_class = FileFieldForm  # ({'min_time': 15, 'max_time': 45})  # Upload from from forms.py for template
+    form_class = FileFieldForm  # Upload from from forms.py for template
     template_name = os.path.join("ChromoGraph", "index.html")  # Basic template
 
     def get(self, request, **kwargs):
         filename = check_status(request)  # Import file name if exists (after POST)
-        form = self.form_class  # Set variable for form for template
+        form = self.form_class(initial={'min_time': 15, 'max_time': 45})  # Set variable for form for template
         # filename = request.session.get('filenames', '')
         if filename:
             zipper = False
@@ -38,15 +38,13 @@ class FileFieldView(FormView):
                 fig, ax = figure.export(file)
 
                 filename = os.path.join('media', request.COOKIES['sessionid'],
-                                        (str(figure.title) + '_').replace('. ', '-'))
+                                        (str(figure.title) + '_')).replace('.', '-').replace(' ', '-')
                 filename += '.' + resp["format"]  # Creating unique path and filename in static/media/
 
                 list_names = request.session.get('filenames', )
                 request.session['filenames'] = (list_names + [filename]) if list_names else [filename]
                 fig.savefig(os.path.join('ChromoGraph', 'static', filename), format=resp['format'])  # Saving graph
-            return redirect(request.path)
-        else:
-            return render(request, os.path.join("ChromoGraph", "index.html"), {'form': form})
+        return redirect(request.path)
 
 
 def zipgraph(ide):
