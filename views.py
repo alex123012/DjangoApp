@@ -10,7 +10,7 @@ class FileFieldView(FormView):
     form_class = FileFieldForm  # Upload from from forms.py for template
     template_name = os.path.join("ChromoGraph", "index.html")  # Basic template
 
-    def get(self, request):
+    def get(self, request, **kwargs):
         filename = check_status(request)  # Import file name if exists (after POST)
         form = self.form_class  # Set variable for form for template
         # filename = request.session.get('filenames', '')
@@ -41,7 +41,7 @@ class FileFieldView(FormView):
                                         (str(figure.title) + '_').replace('. ', '-'))
                 filename += '.' + resp["format"]  # Creating unique path and filename in static/media/
 
-                list_names = request.session.get('filenames', '')
+                list_names = request.session.get('filenames', )
                 request.session['filenames'] = (list_names + [filename]) if list_names else [filename]
                 fig.savefig(os.path.join('ChromoGraph', 'static', filename), format=resp['format'])  # Saving graph
             return redirect(request.path)
@@ -62,18 +62,20 @@ def zipgraph(ide):
 
 
 def check_status(request):
-    if not request.COOKIES.get('sessionid', '') or not request.COOKIES['sessionid']:  # set session cookie
+
+    if not request.COOKIES.get('sessionid', ) or not request.COOKIES['sessionid']:  # set session cookie
         request.session.create()
         request.COOKIES['sessionid'] = request.session.session_key
-        print(request.session.session_key)
-    print(request.COOKIES)
+
     path = os.path.join('ChromoGraph', 'static', 'media')
     if not os.path.exists(path):  # Create new folders for storing graphs
         os.mkdir(path)
         request.session['filenames'] = []
-    path = os.path.join(path, request.COOKIES.get('sessionid'))
+
+    path = os.path.join(path, request.COOKIES.get('sessionid', ))
     if not os.path.exists(path):
         os.mkdir(path)
         request.session['filenames'] = []
+
     return request.session['filenames']
 
