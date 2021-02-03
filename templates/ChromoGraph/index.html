@@ -1,9 +1,18 @@
 <html lang="en" dir="ltr">
  <head>
-  <meta charset="utf-8">
-  <title>ChromoGraph</title>
+     <meta charset="utf-8">
+     <title>ChromoGraph</title>
+     {% load static %}
+     <link type="text/css" rel="stylesheet" href={%  static "ChromoGraph/navstyle.css" %}>
+
  </head>
  <body>
+ <nav>
+<ul>
+    <li><a href="/" class="back">&lArr; go back to menu</a></li>
+    <li><a href="/" class="forward">&rArr; go to polls</a></li>
+</ul>
+</nav>
   <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
       <p>
