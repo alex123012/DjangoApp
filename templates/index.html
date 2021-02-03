@@ -1,0 +1,18 @@
+<html lang="en" dir="ltr">
+ <head>
+  <meta charset="utf-8">
+  <title>ChromoGraph</title>
+ </head>
+ <body>
+  <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+      <p>
+          {{ form.as_p }}
+          <input type="submit" value="Upload">
+      </p>
+  </form>
+ <div id="content">
+     {% block content %}{% endblock %}
+ </div>
+ </body>
+</html>

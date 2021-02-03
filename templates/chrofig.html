@@ -1,0 +1,6 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% load static %}
+    <img src={% static filename %} alt="Kurwa" height="480" width="640">
+    <p><a href='static/{{ filename }}'>link to image</a></p>
+ {% endblock %}
