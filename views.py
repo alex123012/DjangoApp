@@ -1,37 +1,46 @@
 from django.shortcuts import render, redirect
-from .forms import UploadFileForm
-from django.views import View
+from django.views.generic.edit import FormView
+from .forms import FileFieldForm
 from ChromoGraph.chrofig import *
 import os.path
 
 
-class ChromoGraph(View):
+class FileFieldView(FormView):
+    form_class = FileFieldForm
+    template_name = os.path.join("ChromoGraph", "index.html")
 
     def get(self, request):
-        form = UploadFileForm()
-        filename = request.session.get('filename', 'nofile')
+        form = self.form_class
+        filename = request.session.get('filenames', '')
+        url = request.COOKIES['sessionid']
+        if filename:
+            del request.session['filenames']
+            return render(request, os.path.join("ChromoGraph", "index.html"),
+                          {'form': form, 'filename': filename})
 
-        if os.path.exists(os.getcwd() + '/ChromoGraph/static/' + filename):
-            return render(request, "ChromoGraph/chrofig.html", {'form': form, 'filename': filename})
+        return render(request, os.path.join("ChromoGraph", "index.html"), {'form': form})
 
-        return render(request, "ChromoGraph/index.html", {'form': form})
-
-    def post(self, request):
-        form = UploadFileForm(request.POST, request.FILES)
+    def post(self, request, *args, **kwargs):
+        if not os.path.exists(os.path.join('ChromoGraph', 'static',  request.COOKIES['sessionid'])):
+            os.mkdir(os.path.join('ChromoGraph', 'static',  'media', request.COOKIES['sessionid']))
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file_field')
+        resp = request.POST
         if form.is_valid():
-            file = request.FILES['file']
-            resp = request.POST
-            figure = ChromoFigure()
+            for file in files:
 
-            figure.title = resp['title']
-            figure.min_time = float(resp['min_time'])
-            figure.max_time = float(resp['max_time'])
-            fig, ax = figure.export(file)
+                figure = ChromoFigure()
+                figure.title = resp['title'] if resp['title'] and len(files) == 1 else file
+                figure.min_time, figure.max_time = float(resp['min_time']), float(resp['max_time'])
+                fig, ax = figure.export(file)
 
-            filename = (figure.title + '_' + request.COOKIES['sessionid']).replace(' ', '-')
-            request.session['filename'] = f'{filename}.{resp["format"]}'
-            fig.savefig(f'ChromoGraph/static/{filename}.{resp["format"]}', format=resp['format'])
+                filename = os.path.join('media', request.COOKIES['sessionid'],
+                                        (str(figure.title) + '_').replace('. ', '-'))
+                filename += '.' + resp["format"]
+                list_names = request.session.get('filenames', '')
+                request.session['filenames'] = (list_names + [filename]) if list_names else [filename]
+                fig.savefig(os.path.join('ChromoGraph', 'static', filename), format=resp['format'])
             return redirect(request.path)
-        else:
-            form = UploadFileForm()
-        return render(request, 'ChromoGraph/index.html', {'form': form})
+        # else:
+        #     return render(request, os.path.join("ChromoGraph", "index.html"), {'form': form})

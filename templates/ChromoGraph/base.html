@@ -1,0 +1,37 @@
+<html lang="en" dir="ltr">
+ <head>
+     <meta charset="utf-8">
+     <title>ChromoGraph</title>
+     {% load static %}
+     <link type="text/css" rel="stylesheet" href={%  static "ChromoGraph/navstyle.css" %}>
+
+ </head>
+ <body>
+ <nav>
+<ul>
+    <li><a href="/" class="back">&lArr; go back to menu</a></li>
+    <li><a href={% url 'ChromoGraph:multiple' %} class="forward">&rArr; Upload multiple files</a></li>
+</ul>
+</nav>
+ <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 2em 2em 0px;">
+     Usage
+ </div>
+ <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 2em 1.5em;">
+     <ul>
+         <li>Export from chromatogram from Chromeleon to .txt file</li>
+         <li>Upload it to from below</li>
+         <li>Enter valid info about exporting graph below</li>
+         <li>Download image like others from google</li>
+         <li>(Downloadable link in progress)</li>
+     </ul>
+
+ </div>
+<div id="formes">
+    {% block formes %}{% endblock %}
+</div>
+
+ <div id="content">
+     {% block content %}{% endblock %}
+ </div>
+ </body>
+</html>

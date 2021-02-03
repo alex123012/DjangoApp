@@ -1,32 +1,6 @@
-<html lang="en" dir="ltr">
- <head>
-     <meta charset="utf-8">
-     <title>ChromoGraph</title>
-     {% load static %}
-     <link type="text/css" rel="stylesheet" href={%  static "ChromoGraph/navstyle.css" %}>
-
- </head>
- <body>
- <nav>
-<ul>
-    <li><a href="/" class="back">&lArr; go back to menu</a></li>
-    <li><a href="/polls" class="forward">&rArr; go to polls</a></li>
-</ul>
-</nav>
- <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 2em 2em 0px;">
-     Usage
- </div>
- <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 2em 1.5em;">
-     <ul>
-         <li>Export from chromatogram from Chromeleon to .txt file</li>
-         <li>Upload it to from below</li>
-         <li>Enter valid info about exporting graph below</li>
-         <li>Download image like others from google</li>
-         <li>(Downloadable link in progress)</li>
-     </ul>
-
- </div>
-  <form method="post" enctype="multipart/form-data"
+{% extends 'ChromoGraph/base.html' %}
+{% block formes %}
+<form method="post" enctype="multipart/form-data"
   style="width:21em; border: 5px black solid; padding: 5px; margin: 1.5em 2em;">
   {% csrf_token %}
       <p>
@@ -34,9 +8,27 @@
           <input type="submit" value="Upload">
       </p>
   </form>
+{% endblock %}
 
- <div id="content">
-     {% block content %}{% endblock %}
- </div>
- </body>
-</html>
+{% block content %}
+{#    <p><a href={% url 'ChromoGraph:storage' %}'>Link to storage</a></p>#}
+{% if filename|length == 1 %}
+    {% for n in filename %}
+
+    {% load static %}
+    <img src={% static n %} alt="Kurwa" height="666" width="1000"
+    style="position: absolute; top: 9%; right: 2em;">
+    <p><a href='static/{{ n }}' style="position:absolute; bottom: 6.5%; left: 39%">link to image</a></p>
+
+    {% endfor %}
+    {% else %}
+
+    <ul style="position: absolute; top: 9%; right: 2em;">
+    {% for n in filename %}
+
+        <li><a href='static/{{ n }}'>{{ n }}</a></li>
+
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

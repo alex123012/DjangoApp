@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import unidecode
 from io import StringIO
 
 
@@ -40,6 +41,7 @@ class ChromoFigure:
         tmp = ""
         for chunk in file.chunks():
             tmp += chunk.decode().replace(',', '.')
+
         self.temp_file = StringIO(tmp)
 
     def __file_read(self):
