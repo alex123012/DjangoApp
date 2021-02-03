@@ -13,10 +13,10 @@
     <li><a href="/polls" class="forward">&rArr; go to polls</a></li>
 </ul>
 </nav>
- <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 3em 4em 0px;">
+ <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 3em 3em 0px;">
      Usage
  </div>
- <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 4em 3em;">
+ <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 3em 3em;">
      <ul>
          <li>Export from chromatogram from Chromeleon to .txt file</li>
          <li>Upload it to from below</li>
@@ -27,7 +27,7 @@
 
  </div>
   <form method="post" enctype="multipart/form-data"
-  style="width:21em; border: 5px black solid; padding: 5px; margin: 3em 4em;">
+  style="width:21em; border: 5px black solid; padding: 5px; margin: 3em 3em;">
   {% csrf_token %}
       <p>
           {{ form.as_p }}
