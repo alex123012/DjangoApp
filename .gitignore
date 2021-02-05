@@ -6,7 +6,9 @@ __pycache__/
 *.jpg
 *.jpeg
 *.svg
-static/media/*
+ChromoGraph/static/media/*
+#*.sqlite3
+#Django_ChromoGraph
 
 # C extensions
 *.so

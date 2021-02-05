@@ -7,6 +7,7 @@ import zipfile
 
 
 class FileFieldView(FormView):
+
     form_class = FileFieldForm  # Upload from from forms.py for template
     template_name = os.path.join("ChromoGraph", "index.html")  # Basic template
 
@@ -15,6 +16,7 @@ class FileFieldView(FormView):
         form = self.form_class(initial={'min_time': 15, 'max_time': 45})  # Set variable for form for template
         # filename = request.session.get('filenames', '')
         if filename:
+            print(filename)
             zipper = False
             if len(filename) > 1:
                 zipper = zipgraph(request.COOKIES['sessionid'])  # Create zip archive with more than 1 graphs
@@ -37,13 +39,13 @@ class FileFieldView(FormView):
                 figure.min_time, figure.max_time = float(resp['min_time']), float(resp['max_time'])
                 fig, ax = figure.export(file)
 
-                filename = os.path.join('media', request.COOKIES['sessionid'],
+                filename = os.path.join(request.COOKIES['sessionid'],
                                         (str(figure.title) + '_')).replace('.', '-').replace(' ', '-')
                 filename += '.' + resp["format"]  # Creating unique path and filename in static/media/
 
                 list_names = request.session.get('filenames', )
                 request.session['filenames'] = (list_names + [filename]) if list_names else [filename]
-                fig.savefig(os.path.join('ChromoGraph', 'static', filename), format=resp['format'])  # Saving graph
+                fig.savefig(os.path.join('ChromoGraph', 'static', 'media', filename), format=resp['format'])  # Saving graph
         return redirect(request.path)
 
 
