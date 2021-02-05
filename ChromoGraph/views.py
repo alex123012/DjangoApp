@@ -58,7 +58,7 @@ def zipgraph(ide):
             for file in files:
                 myzip.write(os.path.join(root, file))
     os.chdir(cwd)
-    return os.path.join('media', f'{ide}.zip')
+    return os.path.join(f'{ide}.zip')
 
 
 def check_status(request):

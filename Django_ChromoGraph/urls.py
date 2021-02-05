@@ -29,6 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('chromograph/', include('ChromoGraph.urls'), name='chromograph'),
     path('autos/', include('autos.urls'), name='autos'),
+    path('polls/', include('polls.urls'), name='polls'),
+    path('hello/', include('hello.urls'), name='hello'),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^media/(?P<path>.*)$', serve,
             {'document_root': SITE_ROOT, 'show_indexes': True},

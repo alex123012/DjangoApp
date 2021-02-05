@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'ChromoGraph.apps.ChromographConfig',
     'autos.apps.AutosConfig',
     'home.apps.HomeConfig',
+    'hello.apps.HelloConfig',
+    'polls.apps.PollsConfig',
 ]
 
 MIDDLEWARE = [
