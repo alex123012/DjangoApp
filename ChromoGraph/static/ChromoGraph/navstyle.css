@@ -15,12 +15,12 @@ nav li {
   vertical-align: middle;
 }
 
-.back {
+#back {
     position: absolute;
-    left: 20px;
+    left: 40%;
 }
 
-.forward {
+#forward {
     position: absolute;
-    right: 20px;
+    right: 40%;
 }

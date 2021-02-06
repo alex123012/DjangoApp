@@ -10,14 +10,8 @@
 {# </head>#}
 {# <body>#}
 {% extends 'base_bootstrap.html'%}
-{% block navbar %}
-     <nav>
-         <ul>
-             <li><a href="/" class="back">&lArr; go back to menu</a></li>
-             <li><a href={% url 'ChromoGraph:chromograph' %} class="forward">&rArr; Stay tuned!</a></li>
-         </ul>
-     </nav>
-{% endblock %}
+{#{% block navbar %}#}
+{#{% endblock %}#}
 
 {% block content %}
      <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 2em 2em 0;">Usage</div>

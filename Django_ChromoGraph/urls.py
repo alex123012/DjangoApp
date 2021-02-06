@@ -19,6 +19,7 @@ from django.urls import include, path
 from django.conf.urls import url
 from django.views.static import serve
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, 'ChromoGraph/static/media')
@@ -33,7 +34,7 @@ urlpatterns = [
     path('hello/', include('hello.urls'), name='hello'),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^media/(?P<path>.*)$', serve,
-            {'document_root': SITE_ROOT, 'show_indexes': True},
-            name='media_path'
+        {'document_root': SITE_ROOT, 'show_indexes': True},
+        name='media_path'
         ),
 ]

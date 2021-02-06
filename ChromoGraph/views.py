@@ -45,7 +45,8 @@ class FileFieldView(FormView):
 
                 list_names = request.session.get('filenames', )
                 request.session['filenames'] = (list_names + [filename]) if list_names else [filename]
-                fig.savefig(os.path.join('ChromoGraph', 'static', 'media', filename), format=resp['format'])  # Saving graph
+                fig.savefig(os.path.join('ChromoGraph', 'static', 'media', filename),
+                            format=resp['format'])  # Saving graph
         return redirect(request.path)
 
 
@@ -58,7 +59,7 @@ def zipgraph(ide):
             for file in files:
                 myzip.write(os.path.join(root, file))
     os.chdir(cwd)
-    return os.path.join(f'{ide}.zip')
+    return f'{ide}.zip'
 
 
 def check_status(request):
