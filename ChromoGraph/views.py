@@ -35,7 +35,7 @@ class FileFieldView(FormView):
             for file in files:
 
                 figure = ChromoFigure()
-                figure.title = resp['title'] if resp['title'] and len(files) == 1 else file
+                figure.title = resp['title'] if resp['title'] and len(files) == 1 else str(file).replace('.', '_')
                 figure.min_time, figure.max_time = float(resp['min_time']), float(resp['max_time'])
                 fig, ax = figure.export(file)
 
