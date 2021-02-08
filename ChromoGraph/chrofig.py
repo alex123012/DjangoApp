@@ -110,7 +110,7 @@ class ChromoFigure:
                 np.arange(round(miny, -2), round(maxy, -2) + 100)
             )
         ax.xaxis.set_ticks(
-            np.arange(self.min_time, self.max_time + 1, 3)
+            np.arange(self.min_time, self.max_time + 1, 5)
         )
 
         ax.yaxis.set_tick_params(labelsize=22)
