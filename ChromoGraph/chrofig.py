@@ -7,8 +7,9 @@ from io import StringIO
 def changer(x):
 
     """For bad unicode in Windows"""
-
-    return float(''.join([i for i in x if i.isdigit() or i == '.']))
+    if not isinstance(x, (float, int)):
+        return float(''.join([i for i in x if i.isdigit() or i == '.']))
+    return x
 
 
 class ChromoFigure:
