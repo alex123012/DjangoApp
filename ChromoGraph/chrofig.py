@@ -7,6 +7,7 @@ from io import StringIO
 def changer(x):
 
     """For bad unicode in Windows"""
+
     if not isinstance(x, (float, int)):
         return float(''.join([i for i in x if i.isdigit() or i == '.']))
     return x
@@ -14,7 +15,7 @@ def changer(x):
 
 class ChromoFigure:
 
-    """ Export RAW-file chromatoramm to picture graph"""
+    """ Export RAW-file chromatogram to picture graph"""
 
     def __init__(self):
         self.format_list = ['png', 'svg', 'jpg', 'jpeg', 'pdf']
