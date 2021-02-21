@@ -14,7 +14,7 @@ class FileFieldView(FormView):
 
     def get(self, request, **kwargs):
         form = self.form_class()
-        check()
+        check(request)
         return render(request, os.path.join("exelchange", "index.html"), {'form': form, 'img': 'graph.png'})
 
     def post(self, request, *args, **kwargs):
@@ -40,15 +40,23 @@ class FileFieldView(FormView):
             # ax.plot([2.7, 3.4], [1.1, 0.37], linewidth=9, color='green', alpha=1)
             plt.legend()
             plt.grid()
-            check()
-            fig.savefig(os.path.join('exelchange', 'static', 'media', 'graph.png'))
+            check(request)
+            fig.savefig(os.path.join('exelchange', 'static', 'media', request.COOKIES['sessionid'], 'graph.png'))
         return redirect(request.path)
 
 
-def check():
+def check(request):
+    if not request.COOKIES.get('sessionid', ) or not request.COOKIES['sessionid']:  # set session cookie
+        request.session.create()
+        request.COOKIES['sessionid'] = request.session.session_key
+
     path = os.path.join('exelchange', 'static')
     if not os.path.exists(path):
         os.mkdir(path)
-    path = os.path.join('exelchange', 'static', 'media')
+    path = os.path.join(path, 'media')
     if not os.path.exists(path):
         os.mkdir(path)
+    path = os.path.join(path, request.COOKIES.get('sessionid', ))
+    if not os.path.exists(path):
+        os.mkdir(path)
+
