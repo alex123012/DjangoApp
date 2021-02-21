@@ -6,12 +6,13 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 graph = os.path.join(BASE_DIR, 'exelchange', 'static', 'media')
+INDEX_ROOT = os.path.join(BASE_DIR, 'index')
 
 app_name = 'exelchange'
 urlpatterns = [
     path('', views.FileFieldView.as_view(), name='exelchange'),
     url(r'^graph/(?P<path>.*)$', serve,
-        {'document_root': graph},
+        {'document_root': graph, 'show_indexes': True},
         name='graph'
         ),
 ]
