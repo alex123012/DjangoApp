@@ -51,7 +51,7 @@ class FileFieldView(FormView):
             for i, j in result:
                 ax.plot(i, j, 'o', color='green', markersize=20)
 
-            plt.legend()
+            plt.legend(fontsize='xx-large')
             plt.grid()
             check(request)
             fig.savefig(os.path.join('exelchange', 'static', 'media', request.COOKIES['sessionid'], 'graph.png'))
