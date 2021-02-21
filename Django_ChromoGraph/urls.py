@@ -21,7 +21,8 @@ from django.views.static import serve
 from django.views.generic import TemplateView
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-root = os.path.join(BASE_DIR, 'ChromoGraph/static/media')
+root = os.path.join(BASE_DIR, 'ChromoGraph', 'static', 'media')
+# graph = os.path.join(BASE_DIR, 'exelchange/static/media')
 INDEX_ROOT = os.path.join(BASE_DIR, 'index')
 
 urlpatterns = [
@@ -31,6 +32,7 @@ urlpatterns = [
     path('autos/', include('autos.urls'), name='autos'),
     path('polls/', include('polls.urls'), name='polls'),
     path('hello/', include('hello.urls'), name='hello'),
+    path('exelchange/', include('exelchange.urls'), name='exelchange'),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^media/(?P<path>.*)$', serve,
         {'document_root': root, 'show_indexes': True},

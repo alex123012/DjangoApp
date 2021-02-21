@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'hello.apps.HelloConfig',
     'polls.apps.PollsConfig',
+    'exelchange.apps.ExelchangeConfig',
 ]
 
 MIDDLEWARE = [

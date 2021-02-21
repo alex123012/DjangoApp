@@ -13,7 +13,11 @@ class DataFrame(pd.DataFrame):
             pass
 
     def __initial_start(self, x):
-        if os.path.exists(x):
+
+        if isinstance(x, (list, tuple)):
+            return {'x': x[0], 'y': x[1]}
+
+        elif os.path.exists(x):
             _, file_extension = os.path.splitext(x)
             try:
                 if file_extension == '.csv':
@@ -26,11 +30,12 @@ class DataFrame(pd.DataFrame):
                 print('Cant open file')
                 return 1
 
-        elif x is None:
-            try:
-                xaxis = list(map(float, input('Enter x (abscissa) axis values divided by spaces: ').split()))
-                yaxis = list(map(float, input('Enter y (ordinate) axis values divided by spaces: ').split()))
-            except ValueError:
-                'Invalid value(s)'
-
-            return {'x': xaxis, 'y': yaxis}
+        # elif x is None:
+        #     try:
+        #         xaxis = list(map(float, input('Enter x (abscissa) axis values divided by spaces: ').split()))
+        #         yaxis = list(map(float, input('Enter y (ordinate) axis values divided by spaces: ').split()))
+        #     except ValueError:
+        #         'Invalid value(s)'
+        #
+        #     return {'x': xaxis, 'y': yaxis}
+        #
