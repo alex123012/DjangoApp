@@ -15,7 +15,12 @@ class FileFieldView(FormView):
     def get(self, request, **kwargs):
         form = self.form_class()
         check(request)
-        return render(request, os.path.join("exelchange", "index.html"), {'form': form, 'img': 'graph.png'})
+        path = path = os.path.join('exelchange', 'static', 'media')
+        path = os.path.join(path, request.COOKIES.get('sessionid', ), 'graph.png')
+
+        cook = os.path.join(request.COOKIES['sessionid'], 'graph.png') if os.path.exists(path) else None
+        return render(request, os.path.join("exelchange", "index.html"), {'form': form,
+                                                                          'img': cook})
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -37,7 +42,7 @@ class FileFieldView(FormView):
 
             ax.plot(x, y, label='initial', color='black')
             ax.plot(x, y1, label=label, color='orange')
-            # ax.plot([2.7, 3.4], [1.1, 0.37], linewidth=9, color='green', alpha=1)
+
             plt.legend()
             plt.grid()
             check(request)

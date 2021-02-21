@@ -20,10 +20,12 @@
         </form>
     </div>
     <div>
-    {% load static %}
+    {% if img %}
+        {% load static %}
         <img src={% url 'exelchange:graph' img %} alt="Image" height="666" width="1000"
-        style="position: absolute; top: 6%; right: 2em;">
+             style="position: absolute; top: 6%; right: 2em;">
         <p><a href={% url 'exelchange:graph' img %} download style="position:absolute; bottom: 6.5%; left: 39%">link to image</a></p>
+    {% endif %}
     </div>
 
 {% endblock %}
