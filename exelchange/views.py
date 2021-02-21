@@ -30,7 +30,7 @@ class FileFieldView(FormView):
             label = f'{a}*x {b}' if b < 0 else f'{a}*x + {b}'
             fig = plt.figure(figsize=(15, 10))
             ax = fig.add_subplot(111)
-            ax.set_title('Approximation curves',
+            ax.set_title('Approximation curve',
                          fontsize=25,
                          color='black',
                          pad=10)
