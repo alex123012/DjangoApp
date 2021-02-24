@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import os
 
-result = 0
 
 class FileFieldView(FormView):
 
@@ -21,10 +20,9 @@ class FileFieldView(FormView):
 
         cook = os.path.join(request.COOKIES['sessionid'], 'graph.png') if os.path.exists(path) else None
 
-        global result
         return render(request, os.path.join("exelchange", "index.html"), {'form': form,
                                                                           'img': cook,
-                                                                          'result': result},)
+                                                                          'result': request.session.get('result', '')},)
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -37,9 +35,9 @@ class FileFieldView(FormView):
             b = round(appr.intercept, 4)
             y1 = [a * i + b for i in x]
             label = f'y = {a}*x {b}' if b < 0 else f'{a}*x + {b}'
-            global result
+
             result = [((float(i) - b) / a, float(i)) for i in request.POST['absorb'].split()]
-            # request.COOKIES['result'] = result
+            request.session['result'] = result
             fig = plt.figure(figsize=(15, 10))
             ax = fig.add_subplot(111)
             ax.set_title('Approximation curve',

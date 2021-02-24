@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+{% block head %} {% endblock %}
 <!-- Edit dj4e-samples/settings.py and add APP_NAME = 'DJ4E Samples' or similar -->
 <title>{% block title %}{{ settings.APP_NAME }}{% endblock %}</title>
 
@@ -43,8 +45,6 @@
      <link rel="shortcut icon" href="https://i.pinimg.com/originals/67/e6/5d/67e65d7f90425a4de6c0b11aa3c566a6.png" type="image/png">
 
 <meta name="dj4e-version" content="2020-10-23">
-
-{% block head %} {% endblock %}
 
 </head>
 <body>

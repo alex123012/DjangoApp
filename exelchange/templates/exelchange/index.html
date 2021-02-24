@@ -1,5 +1,9 @@
 {% extends 'base_bootstrap.html'%}
 
+{%  block head %}
+    Cache-Control: no-cache
+{% endblock %}
+
 {% block content %}
     <div style="width:21em; text-align: center; border: 5px blue solid; padding: 5px; margin: 2em 2em 0;">Usage</div>
      <div style="width:21em; border: 5px blue solid; padding: 5px; margin: -5px 2em 1.5em;">
@@ -35,7 +39,7 @@
     {% if img %}
         {% load static %}
         <img src={% url 'exelchange:graph' img %} alt="Image" height="666" width="1000"
-             style="position: absolute; top: 6%; right: 2em;">
+             style="position: absolute; top: 6%; right: 1em;">
         <p><a href={% url 'exelchange:graph' img %} download style="position:absolute; bottom: 6.5%; left: 39%">link to image</a></p>
     {% endif %}
     </div>
