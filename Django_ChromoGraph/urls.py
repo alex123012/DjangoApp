@@ -34,6 +34,7 @@ urlpatterns = [
     path('hello/', include('hello.urls'), name='hello'),
     path('exelchange/', include('exelchange.urls'), name='exelchange'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('cats/', include('cats.urls'), name='cats'),
     url(r'^media/(?P<path>.*)$', serve,
         {'document_root': root, 'show_indexes': True},
         name='media_path'

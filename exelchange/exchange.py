@@ -28,7 +28,7 @@ class DataFrame(pd.DataFrame):
                     return pd.read_csv(x, sep='\t')
                 else:
                     return pd.read_exel(x)
-            except Exception:
+            except:
                 print('Cant open file')
                 return 1
 
