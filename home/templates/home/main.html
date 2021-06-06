@@ -1,13 +1,7 @@
 {% extends "base_bootstrap.html" %}
 {% block content %}
-<ul>
-    <li><p><a href='chromograph/'>Turn your text file into chromatohram graph</a></p>
-    <li><p><a href="exelchange/">Calculate calibration curves</a></p></li>
-    <li><p><a href="autos/">Autos CRUD</a></p></li>
-    <li><p><a href="/cats">Cats CRUD</a></p></li>
-    <li><p><a href="polls/">polls</a></p></li>
-    <li><p><a href="hello/">hello</a></p></li>
-    <li><p><a href="media/">MEDIA</a></p></li>
-    <li><p><a href="admin/">admin</a></p></li>
-</ul>
-{% endblock %}
+    <h1>Welcome to {{ settings.APP_NAME }}</h1>
+    <p>
+    Hello world.
+    </p>
+{% endblock content %}
